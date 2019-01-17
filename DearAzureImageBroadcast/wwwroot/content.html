@@ -31,11 +31,15 @@
                 .build();
 
             // Create a function that the hub can call to broadcast messages.
-            connection.on('SendAll', function (tags, faces, description) {
+            connection.on('SendAll', function (name, tags, faces, description) {
 
                 // Add the message to the page.
                 var liElement = document.createElement('li');
-                liElement.innerHTML = "<br><strong>Tags:</strong>" + tags + "<br><strong>Faces:</strong><br>" + faces + "<br><strong>Description:</strong><br>" + description + "<br>";
+                liElement.innerHTML =
+                    "<br><strong>Tags:</strong>" + tags +
+                    "<br><strong>Faces:</strong><br>" + faces +
+                    "<br><strong>Description:</strong><br>" + description +
+                    "<br>";
                 document.getElementById('discussion').appendChild(liElement);
 
             });

@@ -34,9 +34,11 @@ namespace FunctionApp
              {
                  Target = "SendAll",
                  Arguments = new[] {
-                 String.Join("<br>", imageAnalysis.tags.Select(x => x.name)),
-                 String.Join("<br>", imageAnalysis.faces.Select(x => x.gender + " of age " + x.age + " years")),
-                 String.Join("<br>", imageAnalysis.description.captions.Select(x => x.text))
+                     name,
+                     String.Join("<br>", imageAnalysis.tags.Select(x => x.name)),
+                     String.Join("<br>", imageAnalysis.faces.Select(x => x.gender + " of age " + x.age + " years")),
+                 String.Join("<br>",
+                 imageAnalysis.description.captions.Select(x => x.text))
                  }
              });
         }
