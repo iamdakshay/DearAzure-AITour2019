@@ -5,16 +5,74 @@
     <title>Analysis of Images</title>
     <style type="text/css">
         .container {
-            background-color: #99CCFF;
-            border: thick solid #808080;
-            padding: 20px;
+            background-color: #ededed;
+            border: 1px solid #dbe8f4;
+            padding: 10px;
             margin: 20px;
+        }
+
+        .content-wrapper #discussion {
+            padding-left: 0px;
+            margin-top: 0;
+        }
+
+            .content-wrapper #discussion li {
+                list-style-type: none;
+                margin-bottom: 15px;
+                border-bottom: 1px solid #fff;
+            }
+
+                .content-wrapper #discussion li .img-wrapper {
+                    width: 120px;
+                    height: auto;
+                    display: inline-block;
+                    vertical-align: top;
+                }
+
+                    .content-wrapper #discussion li .img-wrapper img {
+                        width: 100%;
+                    }
+
+                .content-wrapper #discussion li .analysis-wrapper {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-left: 10px;
+                    width: 88%;
+                }
+
+                    .content-wrapper #discussion li .analysis-wrapper .analysis-details {
+                        margin-bottom: 10px;
+                    }
+
+                        .content-wrapper #discussion li .analysis-wrapper .analysis-details .label {
+                            font-size: 16px;
+                            font-weight: normal;
+                            margin-right: 10px;
+                            background: #fff;
+                            border-radius: 0 5px 5px 0;
+                            padding: 1px 5px;
+                            vertical-align: top;
+                            display: inline-block;
+                            width: 75px;
+                            border-left: 2px solid #ff3c01;
+                        }
+
+                        .content-wrapper #discussion li .analysis-wrapper .analysis-details .label-details {
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 88%;
+                        }
+
+        .capitalize {
+            text-transform: capitalize;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <ul id="discussion"></ul>
+        <div class="content-wrapper">
+            <ul id="discussion"></ul>
+        </div>
     </div>
     <!--Script references. -->
     <!--Reference the SignalR library. -->
@@ -32,14 +90,14 @@
 
             // Create a function that the hub can call to broadcast messages.
             connection.on('SendAll', function (name, tags, faces, description) {
-
+                debugger
                 // Add the message to the page.
                 var liElement = document.createElement('li');
                 liElement.innerHTML =
-                    "<br><strong>Tags:</strong>" + tags +
-                    "<br><strong>Faces:</strong><br>" + faces +
-                    "<br><strong>Description:</strong><br>" + description +
-                    "<br>";
+                    "<div class='img-wrapper'><img src='https://akshaystorageaccount1.blob.core.windows.net/post-images/" + name + "' />" + "</div>" +
+                    "<div class='analysis-wrapper'>" + "<div class='analysis-details'><span class='label'>Tags</span>" + "<span class='label-details capitalize'>" + tags + "</span>" + "</div>" +
+                    "<div class='analysis-details'><span class='label'>Faces</span>" + "<span class='label-details'>" + faces + "</span>" + "</div>" +
+                    "<div class='analysis-details'><span class='label'>Description</span>" + "<span class='label-details'>" + description + "</span>" + "</div>" + "</div>";
                 document.getElementById('discussion').appendChild(liElement);
 
             });
